@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">GeoQuiz</string>
+    <string name="score">Score: </string>
+
+    <string name="tru">True</string>
+    <string name="fals">False</string>
+
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="q1">Colorado School of Mines is located in South Bend, IN.</string>
+    <string name="q2">I live in Sarasota, FL but was born elsewhere.</string>
+    <string name="q3">This is a best-selling app on the Google Play Store in America.</string>
+    <string name="q4">The average human is faster than the average Florida alligator.</string>
+
+    <string name="correct_toast">Your knowledge is undoubtedly top notch!</string>
+    <string name="incorrect_toast">You must consult the elders for additional training.</string>
+    <string name="judgement_toast">Cheaters never prosper</string>
+    <string name="title_activity_cheat">CheatActivit</string>
+
+</resources>
