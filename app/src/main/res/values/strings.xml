@@ -12,6 +12,8 @@
     <string name="q2">I live in Sarasota, FL but was born elsewhere.</string>
     <string name="q3">This is a best-selling app on the Google Play Store in America.</string>
     <string name="q4">The average human is faster than the average Florida alligator.</string>
+    <string name="q5">What is my name.</string>
+    <string name="q6">What are my major\'s initials?</string>
 
     <string name="correct_toast">Your knowledge is undoubtedly top notch!</string>
     <string name="incorrect_toast">You must consult the elders for additional training.</string>

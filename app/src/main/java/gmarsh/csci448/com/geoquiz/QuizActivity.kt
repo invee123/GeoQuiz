@@ -156,6 +156,4 @@ class QuizActivity : AppCompatActivity() {
         savedInstanceState.putInt(KEY_INDEX, quizViewModel.currentQuestionIndex)
 
     }
-
-
 }
