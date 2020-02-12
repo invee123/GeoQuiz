@@ -6,10 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
+import android.view.View
+import android.widget.*
 import androidx.lifecycle.ViewModelProvider
+import kotlinx.android.synthetic.main.activity_quiz.*
+import org.w3c.dom.Text
 
 private const val LOG_TAG = "448.QuizActivity"
 private const val KEY_INDEX = "index"
@@ -21,6 +22,9 @@ class QuizActivity : AppCompatActivity() {
     private lateinit var scoreTextView: TextView
     private lateinit var questionTextView: TextView
     private lateinit var cheatButton: Button
+    private lateinit var boolView: LinearLayout
+    private lateinit var mcView: LinearLayout
+    private lateinit var responseView: LinearLayout
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +42,8 @@ class QuizActivity : AppCompatActivity() {
         scoreTextView = findViewById(R.id.score_text_view)
         questionTextView = findViewById(R.id.question_text_view)
 
+
+
         updateQuestion()
 
         //listener for true/false buttons
@@ -45,14 +51,39 @@ class QuizActivity : AppCompatActivity() {
         val trueButton: Button = findViewById(R.id.true_button)
         val falseButton: Button = findViewById(R.id.false_button)
         trueButton.setOnClickListener {
-            checkAnswer(true)
+            checkAnswer("true")
         }
         falseButton.setOnClickListener {
-            checkAnswer(false)
+            checkAnswer("false")
         }
 
-        //listener for next/prev buttons
+        //listener for Multiple Choice buttons
+        val a_button: Button = findViewById(R.id.a_button)
+        val b_button: Button = findViewById(R.id.b_button)
+        val c_button: Button = findViewById(R.id.c_button)
+        val d_button: Button = findViewById(R.id.d_button)
+        a_button.setOnClickListener {
+            checkAnswer(quizViewModel.ans1)
+        }
+        b_button.setOnClickListener {
+            checkAnswer(quizViewModel.ans2)
+        }
+        c_button.setOnClickListener {
+            checkAnswer(quizViewModel.ans3)
+        }
+        d_button.setOnClickListener {
+            checkAnswer(quizViewModel.ans4)
+        }
 
+        //listener for Response question
+        val submit_button: Button = findViewById(R.id.submit_button)
+        var response_box = findViewById(R.id.text_box) as EditText
+        submit_button.setOnClickListener {
+            checkAnswer(response_box.text.toString())
+        }
+
+
+        //listener for next/prev buttons
         val nextButton: Button = findViewById(R.id.next_button)
         val prevButton: Button = findViewById(R.id.prev_button)
         nextButton.setOnClickListener {
@@ -62,6 +93,7 @@ class QuizActivity : AppCompatActivity() {
             moveToQuestion(-1)
         }
 
+        //listener for cheat button
         cheatButton = findViewById(R.id.cheat_button)
         cheatButton.setOnClickListener{
             val answerIsTrue = quizViewModel.currentQuestionAnswer
@@ -84,15 +116,43 @@ class QuizActivity : AppCompatActivity() {
 
     private fun updateQuestion() {
         setCurrentScoreText()
+        setCurrentQuestionType()
         questionTextView.text = resources.getString(quizViewModel.currentQuestionTextId)
+
     }
 
     private fun setCurrentScoreText() {
         scoreTextView.text = quizViewModel.currentScore.toString()
     }
 
+    private fun setCurrentQuestionType() {
+        val qType = quizViewModel.questionType
+        boolView = findViewById(R.id.bool)
+        mcView = findViewById(R.id.mc)
+        responseView = findViewById(R.id.response)
 
-    private fun checkAnswer(isCorrect: Boolean) {
+        if(qType == "TF") {
+            boolView.visibility = View.VISIBLE
+            mcView.visibility = View.GONE
+            responseView.visibility = View.GONE
+        } else if(qType == "MC") {
+            mcView.visibility = View.VISIBLE
+            boolView.visibility = View.GONE
+            responseView.visibility = View.GONE
+
+            a_button.text = quizViewModel.ans1
+            b_button.text = quizViewModel.ans2
+            c_button.text = quizViewModel.ans3
+            d_button.text = quizViewModel.ans4
+        } else if(qType == "FREE") {
+            responseView.visibility = View.VISIBLE
+            boolView.visibility = View.GONE
+            mcView.visibility = View.GONE
+        }
+    }
+
+
+    private fun checkAnswer(isCorrect: String) {
         if(quizViewModel.isCheater) {
             Toast.makeText(baseContext, R.string.judgement_toast, Toast.LENGTH_SHORT).show()
         } else {

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:autoSizeTextType="uniform"
+    android:layout_gravity="center"
+    android:layout_margin="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:autoSizeTextType="uniform"
+        android:layout_marginTop="20dp"
+        android:padding="25dp"
+        android:textSize="30dip"
+        android:text="Are you sure that you want to cheat?" />
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp">
+
+        <Button
+            android:id="@+id/cheat_button"
+            android:text="Show the answer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/Widget.AppCompat.Button.Colored"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/answer_text_view"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:autoSizeTextType="uniform"
+        android:padding="24dp"
+        android:textSize="30dip"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        tools:text="Answer will be displayed here" />
+
+
+
+
+
+
+</LinearLayout>

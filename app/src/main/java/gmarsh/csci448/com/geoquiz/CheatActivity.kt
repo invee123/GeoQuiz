@@ -15,6 +15,7 @@ import java.security.AccessControlContext
 
 private lateinit var answerTextView: TextView
 private lateinit var showAnswerButton: Button
+private lateinit var quizViewModel: QuizViewModel
 
 private const val KEY_INDEX = "index"
 private const val LOG_TAG = "448.CheatActivity"
@@ -37,32 +38,21 @@ class CheatActivity : AppCompatActivity() {
 
         answerTextView = findViewById(R.id.answer_text_view)
         showAnswerButton = findViewById(R.id.cheat_button)
-        val answerText = when {
-            answerIsTrue -> R.string.tru
-            else -> R.string.fals
-        }
-        answerTextView.setText(answerText)
+        answerTextView.text = quizViewModel.currentQuestionAnswer
         showAnswerButton.setOnClickListener {
             answerTextView.visibility = View.VISIBLE
             setCheated(true)
         }
 
-
-
     }
 
     companion object {
-        fun createIntent(packageContext: Context, answerIsTrue: Boolean): Intent {
+        fun createIntent(packageContext: Context, answerIsTrue: String): Intent {
             return Intent(packageContext, CheatActivity::class.java).apply {
                 putExtra(EXTRA_ANSWER_IS_TRUE, answerIsTrue)
             }
         }
     }
-
-//    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
-//        super.onSaveInstanceState(outState, outPersistentState)
-//
-//    }
 
     fun setCheated(isAnswerShown: Boolean) {
         val data = Intent().apply {

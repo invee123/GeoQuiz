@@ -57,7 +57,7 @@ class QuizViewModel : ViewModel(){
         }
 
     fun moveToNextQuestion() {
-        if(currentQuestionIndex == 3) {
+        if(currentQuestionIndex == 5) {
             currentQuestionIndex = 0
         } else {
             currentQuestionIndex += 1
@@ -66,23 +66,9 @@ class QuizViewModel : ViewModel(){
 
     fun moveToPreviousQuestion() {
         if(currentQuestionIndex == 0) {
-            currentQuestionIndex = 3
+            currentQuestionIndex = 5
         } else {
             currentQuestionIndex -= 1
-        }
-    }
-
-    fun whatToDisplay() {
-        if(questionType == "TF") {
-            //make id bool visible
-            //make all others gone
-        } else if (questionType == "MC") {
-            //make id MC visible
-            //set tool.text in mc
-            //make all others invisible
-        } else {
-            //make id response visible
-            //make all others invisible
         }
     }
 
